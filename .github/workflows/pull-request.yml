@@ -1,0 +1,46 @@
+name: Pull Request CI
+on:
+  pull_request:
+
+env:
+  NX_CLOUD_DISTRIBUTED_EXECUTION: true
+
+jobs:
+  
+  setup:
+    uses: ./.github/workflows/_setup.yml
+
+  agents-start:
+    needs: [setup]
+    uses: ./.github/workflows/_agents-start.yml
+
+  build:
+    needs: [agents-start]
+    uses: ./.github/workflows/_affected.yml
+    with:
+      TARGET: 'build'
+      REF: ${{ github.event.pull_request.head.ref }}
+
+  lint:
+    needs: [agents-start]
+    uses: ./.github/workflows/_affected.yml
+    with:
+      TARGET: 'lint'
+      MAX_PARALLEL: '2'
+      REF: ${{ github.event.pull_request.head.ref }}
+
+  e2e:
+    needs: [agents-start]
+    uses: ./.github/workflows/_affected.yml
+    with:
+      TARGET: 'e2e'
+      REF: ${{ github.event.pull_request.head.ref }}
+
+  agents:
+    needs: [agents-start]
+    uses: ./.github/workflows/_agents.yml
+
+  agents-stop:
+    needs: [build, lint, e2e]
+    if: ${{ always() }}
+    uses: ./.github/workflows/_agents-stop.yml

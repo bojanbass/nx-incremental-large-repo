@@ -1,0 +1,16 @@
+name: Start NX Cloud CI Run
+
+on:
+  workflow_call:
+
+jobs:
+  start-ci-run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup dependencies
+        uses: ./.github/actions/cache-node-modules
+      - name: Start Nx Agent ${{ matrix.agent }}
+        run: yarn nx-cloud start-ci-run
+      - run: echo "RUN ID is ${{ github.run_id }}"
+      - run: echo "RUN ATTEMPT is ${{ github.run_attempt }}"

@@ -1,0 +1,36 @@
+name: Run affected command for a target
+
+on:
+  workflow_call:
+    inputs:
+      TARGET:
+        required: true
+        type: string
+      MAX_PARALLEL:
+        required: false
+        type: string
+        default: '1'
+      REF:
+        required: false
+        type: string
+        default: 'master'
+
+jobs:
+  run-affected:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout [main]
+        with:
+          ref: ${{ inputs.REF }}
+          fetch-depth: 0
+      - name: Restore dependencies
+        uses: ./.github/actions/cache-node-modules
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v2
+        with:
+          main-branch-name: 'master'
+      # - run: yarn nx-cloud start-ci-run
+      - run: echo "RUN ID is ${{ github.run_id }}"
+      - run: echo "RUN ATTEMPT is ${{ github.run_attempt }}"
+      - run: yarn nx affected --target=${{ inputs.TARGET }} --parallel --max-parallel=${{ inputs.MAX_PARALLEL }}

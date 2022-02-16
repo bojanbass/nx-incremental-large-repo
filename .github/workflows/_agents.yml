@@ -1,0 +1,19 @@
+name: Start NX Cloud Agents
+
+on:
+  workflow_call:
+
+jobs:
+  start-agents:
+    name: NX Cloud Agent
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      matrix:
+        agent: [1, 2, 3, 4]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup dependencies
+        uses: ./.github/actions/cache-node-modules
+      - name: Start Nx Agent ${{ matrix.agent }}
+        run: yarn nx-cloud start-agent
