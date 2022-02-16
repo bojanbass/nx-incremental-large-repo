@@ -12,8 +12,8 @@ jobs:
       matrix:
         agent: [1, 2, 3, 4]
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup dependencies
-        uses: ./.github/actions/cache-node-modules
+      # - uses: actions/checkout@v2
+      # - name: Setup dependencies
+      #   uses: ./.github/actions/cache-node-modules
       - name: Start Nx Agent ${{ matrix.agent }}
-        run: yarn nx-cloud start-agent
+        run: npx nx-cloud start-agent

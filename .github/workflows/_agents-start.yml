@@ -1,0 +1,11 @@
+name: Start NX Cloud CI Run
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    name: build app from source
+    runs-on: ubuntu-latest
+    steps:
+      - run: npx nx-cloud start-ci-run

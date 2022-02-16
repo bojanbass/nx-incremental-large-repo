@@ -10,15 +10,19 @@ jobs:
   setup:
     uses: ./.github/workflows/_setup.yml
 
-  build:
+  agents-start:
     needs: [setup]
+    uses: ./.github/workflows/_agents-start.yml
+
+  build:
+    needs: [agents-start]
     uses: ./.github/workflows/_affected.yml
     with:
       TARGET: 'build'
       REF: ${{ github.event.pull_request.head.ref }}
 
   lint:
-    needs: [setup]
+    needs: [agents-start]
     uses: ./.github/workflows/_affected.yml
     with:
       TARGET: 'lint'
@@ -26,14 +30,14 @@ jobs:
       REF: ${{ github.event.pull_request.head.ref }}
 
   e2e:
-    needs: [setup]
+    needs: [agents-start]
     uses: ./.github/workflows/_affected.yml
     with:
       TARGET: 'e2e'
       REF: ${{ github.event.pull_request.head.ref }}
 
   agents:
-    needs: [setup]
+    needs: [agents-start]
     uses: ./.github/workflows/_agents.yml
 
   agents-stop:
