@@ -35,3 +35,6 @@ jobs:
     needs: [setup]
     uses: ./.github/workflows/_agents.yml
 
+  agents-stop:
+    needs: [build, lint, e2e]
+    uses: ./.github/workflows/_agents-stop.yml

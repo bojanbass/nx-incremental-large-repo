@@ -1,0 +1,11 @@
+name: Build app reusable workflow
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    name: build app from source
+    runs-on: ubuntu-latest
+    steps:
+      - run: npx nx-cloud stop-all-agents

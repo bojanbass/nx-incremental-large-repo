@@ -10,10 +10,10 @@ jobs:
     timeout-minutes: 60
     strategy:
       matrix:
-        agent: [1, 2, 3]
+        agent: [1, 2, 3, 4]
     steps:
       - uses: actions/checkout@v2
       - name: Setup dependencies
         uses: ./.github/actions/cache-node-modules
       - name: Start Nx Agent ${{ matrix.agent }}
-        run: npx nx-cloud start-agent
+        run: yarn nx-cloud start-agent

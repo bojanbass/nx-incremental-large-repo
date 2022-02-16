@@ -31,6 +31,6 @@ jobs:
         uses: nrwl/nx-set-shas@v2
         with:
           main-branch-name: 'master'
-      - run: npx nx-cloud start-ci-run
+      - run: yarn nx-cloud start-ci-run
       - run: yarn nx affected --target=${{ inputs.TARGET }} --parallel --max-parallel=${{ inputs.MAX_PARALLEL }}
-      - run: npx nx-cloud stop-all-agents
+      - run: yarn nx-cloud stop-all-agents
