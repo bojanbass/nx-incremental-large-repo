@@ -1,4 +1,4 @@
-name: Build app reusable workflow
+name: Stop NX Cloud Agents
 
 on:
   workflow_call:

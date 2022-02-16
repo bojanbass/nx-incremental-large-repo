@@ -1,4 +1,4 @@
-name: Build app reusable workflow
+name: Run affected command for a target
 
 on:
   workflow_call:
@@ -33,4 +33,3 @@ jobs:
           main-branch-name: 'master'
       - run: yarn nx-cloud start-ci-run
       - run: yarn nx affected --target=${{ inputs.TARGET }} --parallel --max-parallel=${{ inputs.MAX_PARALLEL }}
-      - run: yarn nx-cloud stop-all-agents
