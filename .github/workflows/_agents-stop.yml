@@ -4,8 +4,7 @@ on:
   workflow_call:
 
 jobs:
-  build:
-    name: build app from source
+  stop-agents:
     runs-on: ubuntu-latest
     steps:
       - run: npx @nrwl/nx-cloud stop-all-agents

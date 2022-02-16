@@ -4,8 +4,11 @@ on:
   workflow_call:
 
 jobs:
-  build:
-    name: build app from source
+  start-ci-run:
     runs-on: ubuntu-latest
     steps:
-      - run: npx @nrwl/nx-cloud start-ci-run
+      - uses: actions/checkout@v2
+      - name: Setup dependencies
+        uses: ./.github/actions/cache-node-modules
+      - name: Start Nx Agent ${{ matrix.agent }}
+        run: yarn @nrwl/nx-cloud start-ci-run

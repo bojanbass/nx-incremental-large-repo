@@ -16,8 +16,7 @@ on:
         default: 'master'
 
 jobs:
-  build:
-    name: build app from source
+  run-affected:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
