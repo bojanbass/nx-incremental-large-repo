@@ -34,6 +34,8 @@ jobs:
         uses: ./.github/actions/cache-node-modules
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
         uses: nrwl/nx-set-shas@v2
+        with:
+          main-branch-name: 'master'
       - run: npx nx-cloud start-ci-run
       - run: yarn nx affected --target=build --parallel --max-parallel=2
       - run: yarn nx affected --target=lint --parallel --max-parallel=2
@@ -52,6 +54,8 @@ jobs:
         uses: ./.github/actions/cache-node-modules     
       - name: Derive appropriate SHAs for base and head for `nx affected` commands
         uses: nrwl/nx-set-shas@v2
+        with:
+          main-branch-name: 'master' 
       - run: npx nx-cloud start-ci-run
       - run: yarn nx affected --target=build --parallel --max-parallel=2
       - run: yarn nx affected --target=lint --parallel --max-parallel=2
