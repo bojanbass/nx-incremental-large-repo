@@ -31,4 +31,6 @@ jobs:
         with:
           main-branch-name: 'master'
       # - run: yarn nx-cloud start-ci-run
+      - run: echo "RUN ID is ${{ github.run_id }}"
+      - run: echo "RUN ATTEMPT is ${{ github.run_attempt }}"
       - run: yarn nx affected --target=${{ inputs.TARGET }} --parallel --max-parallel=${{ inputs.MAX_PARALLEL }}
