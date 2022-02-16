@@ -8,4 +8,4 @@ jobs:
     name: build app from source
     runs-on: ubuntu-latest
     steps:
-      - run: npx nx-cloud start-ci-run
+      - run: npx @nrwl/nx-cloud start-ci-run

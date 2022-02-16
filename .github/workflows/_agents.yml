@@ -16,4 +16,4 @@ jobs:
       # - name: Setup dependencies
       #   uses: ./.github/actions/cache-node-modules
       - name: Start Nx Agent ${{ matrix.agent }}
-        run: npx nx-cloud start-agent
+        run: npx @nrwl/nx-cloud start-agent
