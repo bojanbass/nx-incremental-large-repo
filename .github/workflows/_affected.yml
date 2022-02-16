@@ -1,0 +1,37 @@
+name: Build app reusable workflow
+
+on:
+  workflow_call:
+    inputs:
+      TARGET:
+        required: true
+        type: string     
+      MAX_PARALLEL:
+        required: true
+        type: string
+        default: '1'      
+      REF:
+        required: true
+        type: string
+        default: 'master'
+
+jobs:
+  build:
+    name: build app from source
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout [main]
+        with:
+          ref: ${{ inputs.REF }}
+          fetch-depth: 0
+      - name: Restore dependencies
+        uses: ./.github/actions/cache-node-modules
+      - name: Derive appropriate SHAs for base and head for `nx affected` commands
+        uses: nrwl/nx-set-shas@v2
+        with:
+          main-branch-name: 'master'
+      - run: npx nx-cloud start-ci-run
+      - run: yarn nx affected --target=${{ inputs.TARGET }} --parallel --max-parallel=${{ inputs.MAX_PARALLEL }}
+      - run: npx nx-cloud stop-all-agents
+        
