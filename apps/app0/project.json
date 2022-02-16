@@ -57,7 +57,8 @@
     "serve": {
       "executor": "@nrwl/web:file-server",
       "options": {
-        "buildTarget": "app0:build"
+        "buildTarget": "app0:build",
+        "port": 3333
       },
       "configurations": {
         "production": {

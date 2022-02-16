@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './lib2parent.component.html',
   styleUrls: ['./lib2parent.component.css'],
 })
-export class Lib2parentComponent {}
+export class Lib2parentComponent {
+  public a = 1;
+}
