@@ -11,4 +11,4 @@ jobs:
       - name: Setup dependencies
         uses: ./.github/actions/cache-node-modules
       - name: Start Nx Agent ${{ matrix.agent }}
-        run: yarn @nrwl/nx-cloud start-ci-run
+        run: yarn nx-cloud start-ci-run

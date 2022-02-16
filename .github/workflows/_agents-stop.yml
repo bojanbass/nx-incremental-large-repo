@@ -7,4 +7,8 @@ jobs:
   stop-agents:
     runs-on: ubuntu-latest
     steps:
-      - run: npx @nrwl/nx-cloud stop-all-agents
+      - uses: actions/checkout@v2
+      - name: Setup dependencies
+        uses: ./.github/actions/cache-node-modules
+      - name: Start Nx Agent ${{ matrix.agent }}
+        run: yarn nx-cloud stop-all-agents
