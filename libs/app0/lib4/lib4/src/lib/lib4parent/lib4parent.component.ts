@@ -6,5 +6,3 @@ import { Component } from '@angular/core';
   styleUrls: ['./lib4parent.component.css'],
 })
 export class Lib4parentComponent {}
-
-console.log('test');
