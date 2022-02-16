@@ -5,13 +5,13 @@ on:
     inputs:
       TARGET:
         required: true
-        type: string     
-      MAX_PARALLEL:
-        required: true
         type: string
-        default: '1'      
+      MAX_PARALLEL:
+        required: false
+        type: string
+        default: '1'
       REF:
-        required: true
+        required: false
         type: string
         default: 'master'
 
@@ -34,4 +34,3 @@ jobs:
       - run: npx nx-cloud start-ci-run
       - run: yarn nx affected --target=${{ inputs.TARGET }} --parallel --max-parallel=${{ inputs.MAX_PARALLEL }}
       - run: npx nx-cloud stop-all-agents
-        
