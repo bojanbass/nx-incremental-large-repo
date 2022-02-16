@@ -42,4 +42,5 @@ jobs:
 
   agents-stop:
     needs: [build, lint, e2e]
+    if: ${{ always() }}
     uses: ./.github/workflows/_agents-stop.yml
